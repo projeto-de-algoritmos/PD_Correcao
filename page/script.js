@@ -16,24 +16,62 @@ function memorizationTaxaRetorno(prt, rate, time){
     return realValue;
 }
 
+
+// 100000 parcelas de 200 reais cada, com um taxa de juros composto de 1% intrinseco a elas
 let parcelas = 200;
 let taxa = 0.01;
 let tempo = 100000;
-let ciclos = 10;
 let a, b;
 let totalA = 0, totalB = 0;
 
-for(let i = 0; i < ciclos; i++){
-    console.time('Taxa de Retorno');
+
+// primeiras iteracoes descartadas pois o sistema operacional ainda nao otimizou o uso da memoria
+for(let i = 0; i < 5; i++){
     a = taxaRetorno(parcelas, taxa, tempo);
-    console.timeEnd('Taxa de Retorno');
 }
 
-for(let i = 0; i < ciclos; i++){
-    console.time('Taxa de Retorno com Memorization');
-    b = memorizationTaxaRetorno(parcelas, taxa, tempo);
-    console.timeEnd('Taxa de Retorno com Memorization');
+console.time('5 iterações de Taxa de Retorno');
+for(let i = 0; i < 5; i++){
+    a = taxaRetorno(parcelas, taxa, tempo);
 }
+console.timeEnd('5 iterações de Taxa de Retorno');
+
+console.time('10 iterações de Taxa de Retorno');
+for(let i = 0; i < 10; i++){
+    a = taxaRetorno(parcelas, taxa, tempo);
+}
+console.timeEnd('10 iterações de Taxa de Retorno');
+
+
+console.time('20 iterações de Taxa de Retorno');
+for(let i = 0; i < 20; i++){
+    a = taxaRetorno(parcelas, taxa, tempo);
+}
+console.timeEnd('20 iterações de Taxa de Retorno');
+
+// primeiras iteracoes descartadas pois o sistema operacional ainda nao otimizou o uso da memoria
+for(let i = 0; i < 5; i++){
+    b = memorizationTaxaRetorno(parcelas, taxa, tempo);
+}
+
+console.time('5 iterações de Taxa de Retorno com Memorization');
+for(let i = 0; i < 5; i++){
+    b = memorizationTaxaRetorno(parcelas, taxa, tempo);
+}
+console.timeEnd('5 iterações de Taxa de Retorno com Memorization');
+
+console.time('10 iterações de Taxa de Retorno com Memorization');
+for(let i = 0; i < 10; i++){
+    b = memorizationTaxaRetorno(parcelas, taxa, tempo);
+}
+console.timeEnd('10 iterações de Taxa de Retorno com Memorization');
+
+console.time('20 iterações de Taxa de Retorno com Memorization');
+for(let i = 0; i < 20; i++){
+    b = memorizationTaxaRetorno(parcelas, taxa, tempo);
+}
+console.timeEnd('20 iterações de Taxa de Retorno com Memorization');
+
 
 
 a.forEach((x) => {totalA += x});
@@ -42,9 +80,9 @@ b.forEach((x) => {totalB += x});
 // console.log(a)
 console.log('Valor real:');
 // console.log(a)
-console.log(totalA)
+console.log(totalA.toFixed(2) + ' R$')
 console.log('Valor real com Memorization:');
 // console.log(b)
-console.log(totalB)
+console.log(totalB.toFixed(2) + ' R$')
 console.log('Valor final:');
-console.log(parcelas*tempo)
+console.log((parcelas*tempo).toFixed(2) + ' R$')
