@@ -16,37 +16,39 @@ ao usuário a melhor ordem de execução com o mínimo de atrazo possível.
 
 ## Screenshots
 
-- Página inicial   
+- Situação de desgaste da memória (100000 iterações)   
 <br>
 
-![Home](./assets/)
+![Home](./assets/print1.png)
 
-![Tasks](./assets/)
+- Situação real do dia a dia (10 prestações de 200 reais cada)
+<br>
+
+![Tasks](./assets/print2.png)
 
 ## Instalação 
 **Linguagem**: JavaScript <br>
 **Framework**: Node JS <br>
 
-Nosso projeto usa apenas NodeJS e um arquivo HTML como motores.
+Nosso projeto usa apenas NodeJS como motor.
 
 1. Abra um terminal na pasta que vai ficar os arquivos e faça o clone do repositorio do GitHub para sua máquina:
 ```
-$ git clone https://github.com/projeto-de-algoritmos/PD_Correcao
+$ git clone https://github.com/projeto-de-algoritmos/PD_JurosParcelados.git
 ```
 
 2. Segundo passo entrar na pasta do repositório e instalar as dependências do NodeJS (para isso você deve ter o NodeJS instalado):
 ```
-$ cd ./Greed_OrganizedTasks/back-end/
-$ npm install
+$ cd ./PD_JurosParcelados/page
 ```
 
-3. Inicie o seu servidor NodeJs com o comando:
+3. Execute o arquivo js com o NodeJs com o comando:
 ```
 $ node script.js
 ```
 
 ## Uso 
-Mostra o quanto seu dinheiro pada de juros em compras parceladas.
+Mostra o quanto você realmente gasta do seu dinheiro e o quanto é juros em compras de parcelas fixas com o juros embutido já conhecido.
 
 ## Outros 
 Espera-se que o avaliador tenha framework Node JS em sua máquina.
