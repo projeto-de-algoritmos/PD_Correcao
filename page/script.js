@@ -80,9 +80,9 @@ b.forEach((x) => {totalB += x});
 // console.log(a)
 console.log('Valor real:');
 // console.log(a)
-console.log(totalA.toFixed(2) + ' R$')
+console.log('R$ ' + totalA.toFixed(2))
 console.log('Valor real com Memorization:');
 // console.log(b)
-console.log(totalB.toFixed(2) + ' R$')
+console.log('R$ ' + totalB.toFixed(2))
 console.log('Valor final:');
-console.log((parcelas*tempo).toFixed(2) + ' R$')
+console.log('R$ ' + (parcelas*tempo).toFixed(2))
