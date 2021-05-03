@@ -1,44 +1,50 @@
-
-function totalCI(principle, rate, time) {
-    let prestacao = Array(time);
-    for(let i = 1; i <= time; i++)
-    prestacao[i-1] = cupoundInterest(principle, rate, i);
-    return prestacao;
-}
-
-// CI = P*(1+R/100)^T
-function cupoundInterest(principle, rate, time) {
-    return principle * Math.pow((1 + rate/100), time); // IMPORTANTE: Math.pow() usa recursao <[ x * [ x * [ x ] ] ]>
-}
-
-function memorizationCompoundInterest(primeira, taxa, tempo) {
-    let prestacao = Array(tempo);
-    prestacao[0] = primeira*(1+ taxa/100);
-    for(let i = 1; i < tempo; i++) {
-        prestacao[i] = prestacao[i-1]*(1+ taxa/100);
+// fc_0 sum(j = 1 : n) of fc_j/(1 + i)^j
+function taxaRetorno(prt, rate, time){
+    let realValue = Array(time);
+    for(let i = 1; i <= time; i++){
+        realValue[i-1] = prt/ Math.pow(1 + rate, i);
     }
-    return prestacao;
+    return realValue;
 }
 
-let first = 1200;
-let rate = 0.1;
-let time = 2;
-let cicles = 100;
+function memorizationTaxaRetorno(prt, rate, time){
+    let realValue = Array(time);
+    realValue[0] = prt/(1 + rate);
+    for(let i = 1; i < time; i++) {
+        realValue[i] = realValue[i-1]/(1 + rate);
+    }
+    return realValue;
+}
+
+let parcelas = 200;
+let taxa = 0.01;
+let tempo = 100000;
+let ciclos = 10;
 let a, b;
+let totalA = 0, totalB = 0;
 
-for(let i = 0; i < cicles; i++){
-    console.time('Juros Composto Total');
-    a = totalCI(first, rate, time);
-    console.timeEnd('Juros Composto Total');
-
+for(let i = 0; i < ciclos; i++){
+    console.time('Taxa de Retorno');
+    a = taxaRetorno(parcelas, taxa, tempo);
+    console.timeEnd('Taxa de Retorno');
 }
 
-for(let i = 0; i < cicles; i++){
-    console.time('Juros Composto Total com Memorization');
-    b = memorizationCompoundInterest(first, rate, time);
-    console.timeEnd('Juros Composto Total com Memorization');
-
+for(let i = 0; i < ciclos; i++){
+    console.time('Taxa de Retorno com Memorization');
+    b = memorizationTaxaRetorno(parcelas, taxa, tempo);
+    console.timeEnd('Taxa de Retorno com Memorization');
 }
 
-console.log('Juros Composto do ultimo dia: '+ a[a.length-1]);
-console.log('Juros Composto com Memorization do ultimo dia: ' + b[b.length-1]);
+
+a.forEach((x) => {totalA += x});
+b.forEach((x) => {totalB += x});
+
+// console.log(a)
+console.log('Valor real:');
+// console.log(a)
+console.log(totalA)
+console.log('Valor real com Memorization:');
+// console.log(b)
+console.log(totalB)
+console.log('Valor final:');
+console.log(parcelas*tempo)
